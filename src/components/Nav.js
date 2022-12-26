@@ -10,7 +10,7 @@ function Nav(props) {
         className={`navbar navbar-expand-lg bg-${props.theme} border border-${props.textTheme}`}
       >
         <div className="container-fluid">
-          <Link className={`navbar-brand text-${props.textTheme}`} to="/home">
+          <Link className={`navbar-brand text-${props.textTheme}`} to="/">
             Text-To-Go
           </Link>
           <button
@@ -30,7 +30,7 @@ function Nav(props) {
                 <Link
                   className={`nav-link active text-${props.textTheme}`}
                   aria-current="page"
-                  to="/home"
+                  to="/"
                 >
                   Home
                 </Link>
