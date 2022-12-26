@@ -30,7 +30,7 @@ function Nav(props) {
                 <Link
                   className={`nav-link active text-${props.textTheme}`}
                   aria-current="page"
-                  to="/"
+                  to="/home"
                 >
                   Home
                 </Link>
