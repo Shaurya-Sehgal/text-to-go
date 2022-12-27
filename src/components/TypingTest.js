@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import Word from "./Word";
 import "../App.css";
+import { useEffect } from "react";
 
 function TypingTest(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,6 +12,8 @@ function TypingTest(props) {
   const [correctWords, setCorrectWords] = useState(0);
   const [time, setTime] = useState(0);
   const [finalResult, setFinalResult] = useState(0);
+  const [username, setUsername] = useState("-");
+  const [speed, setSpeed] = useState("loading...");
   let timer = useRef(null);
   const [words, setWords] = useState([
     { word: "hello", status: "untracked" },
@@ -23,6 +26,22 @@ function TypingTest(props) {
     { word: "coding", status: "untracked" },
     { word: "random", status: "untracked" },
   ]);
+
+  let data;
+
+  async function getHighestSpeed() {
+    data = await fetch(
+      "https://apex.oracle.com/pls/apex/shaurya_sehgal/typing/speed"
+    );
+    let convertedData = await data.json();
+    console.log(convertedData.items);
+    setUsername(convertedData.items[0].username);
+    setSpeed(convertedData.items[0].speed);
+  }
+
+  useEffect(() => {
+    getHighestSpeed();
+  }, []);
 
   const handleOnChange = (event) => {
     if (currentIndex == words.length) {
@@ -57,6 +76,12 @@ function TypingTest(props) {
   return (
     <>
       <div className="container box pt-5">
+        <div className="row">
+          <div className="col text-end">
+            <h4>Speed: {speed}</h4>
+            <h4>{username}</h4>
+          </div>
+        </div>
         <div className="row text-center my-5">
           <div className="col">
             <h1 className={`text-${props.textTheme}`}>
