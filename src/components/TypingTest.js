@@ -13,8 +13,13 @@ function TypingTest(props) {
   const [time, setTime] = useState(0);
   const [finalResult, setFinalResult] = useState(0);
   const [username, setUsername] = useState("-");
-  const [speed, setSpeed] = useState("loading...");
+  const [topSpeed, setTopSpeed] = useState("loading...");
+  const [yourSpeed, setYourSpeed] = useState(0);
+  console.log("yourSpeed");
   let timer = useRef(null);
+  let name = "unknown";
+  let api = "";
+  const [nameInput, setnameInput] = useState("");
   const [words, setWords] = useState([
     { word: "hello", status: "untracked" },
     { word: "website", status: "untracked" },
@@ -36,19 +41,34 @@ function TypingTest(props) {
     let convertedData = await data.json();
     console.log(convertedData.items);
     setUsername(convertedData.items[0].username);
-    setSpeed(convertedData.items[0].speed);
+    setTopSpeed(convertedData.items[0].speed);
   }
 
   useEffect(() => {
     getHighestSpeed();
   }, []);
 
+  const updateRecord = async () => {
+    api = `https://apex.oracle.com/pls/apex/shaurya_sehgal/new/top?username=${nameInput}&speed=${yourSpeed}`;
+    await fetch(api, { method: "POST" });
+    getHighestSpeed();
+  };
+
+  function updateName() {
+    updateRecord();
+    console.log(yourSpeed);
+  }
+
   const handleOnChange = (event) => {
     if (currentIndex == words.length) {
+      //test over
+      setYourSpeed(Math.floor(correctWords / (finalResult / 60)));
+      if (yourSpeed > topSpeed) {
+        document.getElementById("callModal").click();
+      }
       return;
     }
     if (currentIndex + 1 == words.length) {
-      console.log("eee");
       clearInterval(timer.current);
     }
 
@@ -75,10 +95,73 @@ function TypingTest(props) {
   };
   return (
     <>
+      <>
+        {/* Button trigger modal */}
+        <button
+          id="callModal"
+          type="button"
+          className="btn btn-primary d-none"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Launch static backdrop modal
+        </button>
+        {/* Modal */}
+        <div
+          className="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex={-1}
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                  You beat the WPM high score!
+                </h1>
+              </div>
+              <div className="modal-body text-center">
+                <p>Please enter your display name</p>
+                <input
+                  onChange={(event) => {
+                    setnameInput(event.target.value);
+                  }}
+                  value={nameInput}
+                  type="text"
+                  id="displayName"
+                  className="form-control w-100"
+                  placeholder="display name"
+                  aria-label="Username"
+                  aria-describedby="addon-wrapping"
+                />
+                <p className="mt-4">
+                  By doing this, you agree that your display name is appropriate
+                  and does not contain more than 10 letters.
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  onClick={updateName}
+                  type="button"
+                  className="btn btn-primary"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+
       <div className="container box pt-5">
         <div className="row">
           <div className="col text-end">
-            <h4>Speed: {speed}</h4>
+            <h4>Top Speed: {topSpeed}</h4>
             <h4>{username}</h4>
           </div>
         </div>
