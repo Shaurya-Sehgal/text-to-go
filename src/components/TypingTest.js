@@ -3,6 +3,7 @@ import { useState } from "react";
 import Word from "./Word";
 import "../App.css";
 import { useEffect } from "react";
+import refresh from "./refresh.png";
 
 function TypingTest(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -161,8 +162,19 @@ function TypingTest(props) {
       <div className="container box pt-5">
         <div className="row">
           <div className="col text-end">
-            <h4>Top Speed: {topSpeed}</h4>
-            <h4>{username}</h4>
+            <div className="d-flex justify-content-end align-items-center">
+              <img
+                src={refresh}
+                alt=""
+                width={35}
+                className="me-2"
+                onClick={getHighestSpeed}
+              />
+              <h4 className={`text-${props.textTheme}`}>
+                Top Speed: {topSpeed}
+              </h4>
+            </div>
+            <h4 className={`text-${props.textTheme}`}>{username}</h4>
           </div>
         </div>
         <div className="row text-center my-5">

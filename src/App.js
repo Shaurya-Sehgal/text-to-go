@@ -6,6 +6,7 @@ import About from "./components/About";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import TypingTest from "./components/TypingTest";
+import Statistics from "./components/Statistics";
 
 function App() {
   const changeTheme = () => {
@@ -36,6 +37,10 @@ function App() {
         <Route
           path="/typingtest"
           element={<TypingTest theme={theme} textTheme={textTheme} />}
+        />
+        <Route
+          path="/statistics"
+          element={<Statistics theme={theme} textTheme={textTheme} />}
         />
       </Routes>
     </>

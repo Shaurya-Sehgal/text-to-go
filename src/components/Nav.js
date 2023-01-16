@@ -7,7 +7,7 @@ function Nav(props) {
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg bg-${props.theme} border border-${props.textTheme}`}
+        className={`navbar navbar-expand-lg bg-${props.theme} border sticky-top border-${props.textTheme}`}
       >
         <div className="container-fluid">
           <Link
@@ -54,6 +54,15 @@ function Nav(props) {
                   to="/typingtest"
                 >
                   Typing Test
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className={`nav-link active text-${props.textTheme}`}
+                  aria-current="page"
+                  to="/statistics"
+                >
+                  Statistics
                 </Link>
               </li>
             </ul>

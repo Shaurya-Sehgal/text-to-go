@@ -7,6 +7,7 @@ function Text(props) {
   };
   const makeUppercase = () => {
     setText(text.toUpperCase());
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/uppercase");
   };
   const makeLowercase = () => {
     setText(text.toLowerCase());
