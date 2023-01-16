@@ -11,27 +11,35 @@ function Text(props) {
   };
   const makeLowercase = () => {
     setText(text.toLowerCase());
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/lowercase");
   };
   const makeSnakecase = () => {
     setText(text.toLowerCase().split(" ").join("_"));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/snakecase");
   };
   const copy = () => {
     navigator.clipboard.writeText(text);
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/copytext");
   };
   const lineBreak = () => {
     setText(text.split("\n").join(" "));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/linebreak");
   };
   const insertComma = () => {
     setText(text.split(" ").join(","));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/comma");
   };
   const makeArray = () => {
     setText('["' + text.split(" ").join('","') + '"]');
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/makearray");
   };
   const splitText = () => {
     setText(text.split(" ").join("\n"));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/splittext");
   };
   const reverse = () => {
     setText(text.split("").reverse().join(""));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/reversetext");
     generateNumber();
   };
   const generateNumber = () => {
@@ -40,9 +48,11 @@ function Text(props) {
       words[i] = i + 1 + words[i];
     }
     setText(words.join("\n"));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/numberlines");
   };
   const multiply = () => {
     setText(text.repeat(2));
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/repeatline");
   };
   const random = () => {};
   return (
