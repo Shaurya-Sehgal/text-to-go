@@ -85,7 +85,12 @@ function Statistics(props) {
                 </tr>
               </tbody>
             </table>
-            <button className="btn btn-primary" onClick={getMostUsed}>
+            <button
+              className={`btn btn-${
+                props.theme == "light" ? "secondary" : "outline-light"
+              }`}
+              onClick={getMostUsed}
+            >
               Refresh
             </button>
           </div>
