@@ -16,7 +16,7 @@ function TypingTest(props) {
   const [username, setUsername] = useState("-");
   const [topSpeed, setTopSpeed] = useState("loading...");
   const [yourSpeed, setYourSpeed] = useState(0);
-  console.log("yourSpeed");
+  const [latestWPM, setLatestWPM] = useState("loading...");
   let timer = useRef(null);
   let name = "unknown";
   let api = "";
@@ -34,19 +34,28 @@ function TypingTest(props) {
   ]);
 
   let data;
+  let dataResult;
 
   async function getHighestSpeed() {
     data = await fetch(
       "https://apex.oracle.com/pls/apex/shaurya_sehgal/typing/speed"
     );
     let convertedData = await data.json();
-    console.log(convertedData.items);
     setUsername(convertedData.items[0].username);
     setTopSpeed(convertedData.items[0].speed);
   }
 
+  async function getLatestResult() {
+    dataResult = await fetch(
+      "https://apex.oracle.com/pls/apex/shaurya_sehgal/speed/latest"
+    );
+    let convertedResult = await dataResult.json();
+    setLatestWPM(convertedResult.items[0].wpm);
+  }
+
   useEffect(() => {
     getHighestSpeed();
+    getLatestResult();
   }, []);
 
   const updateRecord = async () => {
@@ -55,14 +64,23 @@ function TypingTest(props) {
     getHighestSpeed();
   };
 
+  const updateLatestResult = async () => {
+    api = `https://apex.oracle.com/pls/apex/shaurya_sehgal/speed/latest?wpm=${
+      currentWord >= words.length
+        ? Math.floor(correctWords / (finalResult / 60))
+        : Math.floor(correctWords / (time / 60))
+    }`;
+    await fetch(api, { method: "POST" });
+  };
+
   function updateName() {
     updateRecord();
-    console.log(yourSpeed);
   }
 
   const handleOnChange = (event) => {
     if (currentIndex == words.length) {
       //test over
+      updateLatestResult();
       setYourSpeed(Math.floor(correctWords / (finalResult / 60)));
       if (yourSpeed > topSpeed) {
         document.getElementById("callModal").click();
@@ -175,6 +193,11 @@ function TypingTest(props) {
               </h4>
             </div>
             <h4 className={`text-${props.textTheme}`}>{username}</h4>
+          </div>
+        </div>
+        <div className="row text-center">
+          <div className="col">
+            <h4>Last WPM: {latestWPM}</h4>
           </div>
         </div>
         <div className="row text-center my-5">

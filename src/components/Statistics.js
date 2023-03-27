@@ -22,6 +22,7 @@ function Statistics(props) {
   return (
     <>
       <div className="container text-center">
+        <h1 className="mt-4"># of Times Used</h1>
         <div
           className="row d-flex align-items-center"
           style={{ minHeight: "90vh" }}

@@ -31,7 +31,9 @@ function Text(props) {
   };
   const makeArray = () => {
     setText('["' + text.split(" ").join('","') + '"]');
-    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/makearray");
+    console.log(
+      fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/array")
+    );
   };
   const splitText = () => {
     setText(text.split(" ").join("\n"));
@@ -54,7 +56,10 @@ function Text(props) {
     setText(text.repeat(2));
     fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/repeatline");
   };
-  const random = () => {};
+  const random = () => {
+    alert("We are still working on this function");
+    fetch("https://apex.oracle.com/pls/apex/shaurya_sehgal/used/randomcase");
+  };
   return (
     <>
       <div className={`bg-${props.theme}`}>
