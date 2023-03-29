@@ -10,10 +10,6 @@ View statistics on your writing and change however you like. For example, you ca
 ## Typing Speed Test
 
 Take a WPM test and see your WPM with accuracy. See past attemps as well as the highest WPM score made.
-## Contributing
-
-Contributions are always welcome!
-
 
 ## API Reference
 
@@ -33,6 +29,10 @@ Contributions are always welcome!
 | :-------- | :------- | :-------------------------------- |
 | `username`| `string` | **Required**. Username            |
 | `speed`   | `string` | **Required**. Top Speed           |
+
+## Contributing
+
+Contributions are always welcome!
 
 ## Mentor
 
