@@ -22,7 +22,7 @@ Take a WPM test and see your WPM with accuracy. See past attemps as well as the 
 #### Update top speed
 
 ```http
-  GET https://apex.oracle.com/pls/apex/shaurya_sehgal/new/top
+  POST https://apex.oracle.com/pls/apex/shaurya_sehgal/new/top
 ```
 
 | Parameter | Type     | Description                       |
