@@ -27,7 +27,7 @@ function App() {
       <Nav changeTheme={changeTheme} theme={theme} textTheme={textTheme} />
       <Routes>
         <Route
-          path="/text-to-go/"
+          path="/"
           element={<Text theme={theme} textTheme={textTheme} />}
         />
         <Route
